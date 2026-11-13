@@ -29,7 +29,8 @@ services:
 
   outline:
     build:
-      context: ..
+      # Runs from /opt/apps/outline after CI copies this file to the repo root.
+      context: .
       dockerfile: venus/Dockerfile
     restart: unless-stopped
     env_file:
