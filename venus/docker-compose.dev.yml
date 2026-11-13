@@ -1,0 +1,28 @@
+# Dev data plane only — run outline itself with `yarn dev` against these.
+# Ports offset from the sso dev stack (5434/6381/1027) so both can run together.
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    ports:
+      - "127.0.0.1:5435:5432"
+    environment:
+      POSTGRES_USER: outline
+      POSTGRES_PASSWORD: outline-dev
+      POSTGRES_DB: outline
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "127.0.0.1:6382:6379"
+
+  mailpit:
+    image: axllent/mailpit
+    ports:
+      - "127.0.0.1:1028:1025"
+      - "127.0.0.1:8028:8025"
+
+volumes:
+  postgres-data:
